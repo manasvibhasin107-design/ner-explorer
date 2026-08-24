@@ -1,9 +1,6 @@
 import streamlit as st
 import requests
 
-# --------------------------------------------------
-# PAGE CONFIG
-# --------------------------------------------------
 
 st.set_page_config(
     page_title="NLP Explorer",
@@ -11,9 +8,6 @@ st.set_page_config(
     layout="wide"
 )
 
-# --------------------------------------------------
-# CUSTOM CSS
-# --------------------------------------------------
 
 st.markdown("""
 <style>
@@ -75,9 +69,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# --------------------------------------------------
-# SIDEBAR
-# --------------------------------------------------
 
 with st.sidebar:
 
@@ -107,9 +98,6 @@ with st.sidebar:
     st.caption("AIML Project")
 
 
-# --------------------------------------------------
-# HERO SECTION
-# --------------------------------------------------
 
 st.markdown("""
 <div class="hero">
@@ -125,9 +113,6 @@ and discover how machines understand language.
 """, unsafe_allow_html=True)
 
 
-# --------------------------------------------------
-# INPUT SECTION
-# --------------------------------------------------
 
 st.subheader("📝 Enter Your Text")
 
@@ -137,9 +122,6 @@ text = st.text_area(
 )
 
 
-# --------------------------------------------------
-# ANALYZE BUTTON
-# --------------------------------------------------
 
 analyze = st.button(
     "🔍 Analyze Text",
@@ -160,7 +142,7 @@ if analyze:
             try:
 
                 response = requests.post(
-                    "http://127.0.0.1:8000/analyze",
+                    "https://ner-explorer.onrender.com/analyze",
                     params={"text": text}
                 )
 
@@ -179,10 +161,7 @@ if analyze:
         st.success("✅ Text analyzed successfully!")
 
 
-        # --------------------------------------------------
-        # METRICS
-        # --------------------------------------------------
-
+        
         st.subheader("📊 Text Statistics")
 
         col1, col2, col3, col4 = st.columns(4)
@@ -219,10 +198,7 @@ if analyze:
         st.markdown("---")
 
 
-        # --------------------------------------------------
-        # RESULTS
-        # --------------------------------------------------
-
+        
         st.subheader("🔎 NLP Analysis")
 
         tab1, tab2, tab3, tab4, tab5 = st.tabs([
@@ -234,7 +210,6 @@ if analyze:
         ])
 
 
-        # TOKENS
 
         with tab1:
 
@@ -246,7 +221,6 @@ if analyze:
             st.write(result["tokens"])
 
 
-        # LEMMAS
 
         with tab2:
 
@@ -257,7 +231,6 @@ if analyze:
             st.write(result["lemmas"])
 
 
-        # POS
 
         with tab3:
 
@@ -275,7 +248,6 @@ if analyze:
                 )
 
 
-        # STOP WORDS
 
         with tab4:
 
@@ -294,7 +266,6 @@ if analyze:
                 st.info("No stop words detected.")
 
 
-        # ENTITIES
 
         with tab5:
 
@@ -327,9 +298,6 @@ if analyze:
                 st.info("No named entities detected.")
 
 
-# --------------------------------------------------
-# FOOTER
-# --------------------------------------------------
 
 st.markdown("""
 <div class="footer">
